@@ -1,0 +1,82 @@
+
+Merge 2 sorted linked list in reverse order
+=============================================
+
+
+ struct Node * mergeResult(Node *node1,Node *node2)
+    {
+        // your code goes here
+        Node *i=node1;
+        Node *j=node2;
+        // if(j==NULL){
+        //     cout<<"HI"<<" ";
+        // }
+        struct Node *res=NULL;
+        if(i!=NULL && j!=NULL){
+            if(i->data<=j->data){
+                res=newNode(i->data);
+                i=i->next;
+            }
+            else{
+                res=newNode(j->data);
+                j=j->next;
+            }    
+        }
+        else if(i!=NULL && j==NULL){
+            res=newNode(i->data);
+            i=i->next;
+        }
+        else if(i==NULL && j!=NULL){
+            res=newNode(j->data);
+            j=j->next;
+        }
+        else{
+            return res;
+        }
+        // cout<<res->data<<" ";
+        Node *temp=res;
+        if(i!=NULL && j!=NULL){
+            while(i && j){
+                if((i->data)<=j->data){
+                
+                    // cout<<i->data<<" ";
+                    temp->next=newNode(i->data);
+                    i=i->next;
+                    temp=temp->next;
+                }
+                else{
+                    // Node *t;
+                    // t->data=j->data;
+                    temp->next=newNode(j->data);
+                    j=j->next;
+                    temp=temp->next;
+                }
+            }
+        }
+        
+        while(i){
+            temp->next=newNode(i->data);
+            i=i->next;
+            temp=temp->next;
+        }
+        while(j){
+            temp->next=newNode(j->data);
+            j=j->next;
+            temp=temp->next;
+        }
+        
+        Node* store=res;
+        Node*  tes=res->next;
+        res->next=NULL;
+        while(tes){
+            store=tes->next;
+            tes->next=res;
+            res=tes;
+            tes=store;
+        }
+        
+        // return head;
+        
+        
+        
+        return res;
