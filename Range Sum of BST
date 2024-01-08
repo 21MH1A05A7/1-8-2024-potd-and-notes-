@@ -1,0 +1,19 @@
+int c=0;
+    void dfs(TreeNode* root,int l,int h){
+       if(root==NULL){
+           return;
+       }
+        if(root){
+             if(root->val>=l && root->val<=h){
+                c+=(root->val);
+            }
+            dfs(root->left,l,h);
+            dfs(root->right,l,h);
+        }
+    }
+
+
+    int rangeSumBST(TreeNode* root, int low, int high) {
+        dfs(root,low,high);
+         return c;
+    }
